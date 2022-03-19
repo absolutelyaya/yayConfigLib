@@ -12,9 +12,7 @@
   "icon": "assets/yayConfig/icon.png",
   "environment": "client",
   "entrypoints": {},
-  "mixins": [
-    "yayConfigLib.mixins.json"
-  ],
+  "mixins": [],
   "depends": {
     "fabricloader": ">=0.13.3",
     "fabric": "*",
