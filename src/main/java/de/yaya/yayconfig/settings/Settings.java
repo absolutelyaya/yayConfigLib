@@ -3,7 +3,6 @@ package de.yaya.yayconfig.settings;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.option.Option;
-import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,34 +11,21 @@ import java.util.List;
 @Environment(EnvType.CLIENT)
 public class Settings
 {
-	public static Class<SettingsCategory> category;
-	static final HashMap<SettingsCategory, List<AbstractSetting>> SETTINGS = new HashMap<>();
-	
-	//Clouds
-	public static final BooleanSetting CLOUDS = new BooleanSetting("clouds.enabled", true, true);
-	
-	//Fog
-	public static final BooleanSetting FOG = new BooleanSetting("fog.enabled", true, true);
-	public static final PerEntrySetting<Biome.Category> FOG_PER_BIOME = new PerEntrySetting<>("fog.biome", Biome.Category.class,
-			List.of(
-					new SliderSetting("fog.color.fade-speed", 1.0, 0.1, 2.0, 0.01f, 2, false),
-					new SliderSetting("fog.speed", 1.0, 0.1, 2.0, 0.01f, 2, false)
-			),
-			List.of(Biome.Category.THEEND, Biome.Category.NONE, Biome.Category.NETHER, Biome.Category.UNDERGROUND))
-			.setRequirements(List.of(FOG));
+	public static Class<? extends SettingsCategory> category;
+	protected static final HashMap<SettingsCategory, List<AbstractSetting>> SETTINGS = new HashMap<>();
 	
 	//Peset
 	public static final ChoiceSetting PRESET = new ChoiceSetting("general.preset", List.of("a", "b", "c", "d"), true)
 			.setChangeConsumer(Settings::applyPreset);
 	
-	public Settings(Class<SettingsCategory> category)
+	public Settings(Class<? extends SettingsCategory> category)
 	{
 		this.category = category;
 	}
 	
 	public static void applyPreset(String name)
 	{
-		if(name.equals("custom") || name.equals("§4ERROR"))
+		if(name.equals("custom") || name.equals("§4ERROR") || category == null)
 			return;
 		String[] segments = name.split("\\|");
 		for(SettingsCategory cat : category.getEnumConstants())

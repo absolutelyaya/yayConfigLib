@@ -6,5 +6,5 @@ public interface SettingsCategory
 {
 	TranslatableText getTitle();
 	
-	SettingsCategory[] values();
+	SettingsCategory[] getValues();
 }
