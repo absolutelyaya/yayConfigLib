@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "yayconfig",
+  "version": "${version}",
+  "name": "YayConfigLib",
+  "description": "A Library for Config stuff in yayas mods.",
+  "authors": [
+    "Absolutelyaya"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/yayConfig/icon.png",
+  "environment": "client",
+  "entrypoints": {},
+  "mixins": [
+    "yayConfigLib.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "fabric": "*",
+    "minecraft": "1.18.2"
+  },
+  "custom": {
+    "modmenu": {
+      "badges": [ "library" ]
+    }
+  }
+}
