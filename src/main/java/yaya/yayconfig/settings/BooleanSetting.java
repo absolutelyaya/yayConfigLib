@@ -4,7 +4,6 @@ import yaya.yayconfig.mojangOptions.Option;
 import yaya.yayconfig.mojangOptions.widgets.CyclingButtonWidget;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
@@ -66,13 +65,8 @@ public class BooleanSetting extends AbstractSetting
 	public Option asOption()
 	{
 		return new YayCycler<>(translationKey,
-				ignored -> SettingsStorage.getBoolean(id), (ignored, option, value) -> SettingsStorage.setBoolean(id, (boolean)value),
-				this::onOffBuilder, requirements);
-	}
-	
-	public CyclingButtonWidget.Builder<Boolean> onOffBuilder()
-	{
-		return (new CyclingButtonWidget.Builder<>(value -> value ? ScreenTexts.ON : ScreenTexts.OFF));
+				ignored -> SettingsStorage.getBoolean(id), (ignored, option, value) -> SettingsStorage.setBoolean(id, value),
+				CyclingButtonWidget::onOffBuilder, requirements);
 	}
 	
 	@Override

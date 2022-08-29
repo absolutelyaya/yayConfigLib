@@ -9,14 +9,14 @@
   ],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/yayConfig/icon.png",
+  "icon": "assets/yayconfig/icon.png",
   "environment": "client",
   "entrypoints": {},
   "mixins": [],
   "depends": {
     "fabricloader": ">=0.12.12",
     "fabric": "*",
-    "minecraft": "1.18.1"
+    "minecraft": "1.19"
   },
   "custom": {
     "modmenu": {

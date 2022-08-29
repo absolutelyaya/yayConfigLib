@@ -19,9 +19,12 @@ import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
+import yaya.yayconfig.accessors.ClickableWidgetAccessor;
+import yaya.yayconfig.settings.BooleanSetting;
 
 @Environment(EnvType.CLIENT)
-public class CyclingButtonWidget<T> extends PressableWidget implements OrderableTooltip {
+public class CyclingButtonWidget<T> extends PressableWidget implements OrderableTooltip, ClickableWidgetAccessor
+{
 	static final BooleanSupplier HAS_ALT_DOWN = Screen::hasAltDown;
 	private static final List<Boolean> BOOLEAN_VALUES;
 	private final Text optionText;
@@ -137,8 +140,27 @@ public class CyclingButtonWidget<T> extends PressableWidget implements Orderable
 		return new Builder<>(valueToText);
 	}
 	
+	
+	public static Builder<Boolean> onOffBuilder(Text on, Text off) {
+		return (new Builder<Boolean>((value) -> value ? on : off)).values(BOOLEAN_VALUES);
+	}
+	
+	public static Builder<Boolean> onOffBuilder() {
+		return (new Builder<Boolean>((value) -> value ? ScreenTexts.ON : ScreenTexts.OFF)).values(BOOLEAN_VALUES);
+	}
+	
+	public static Builder<Boolean> onOffBuilder(boolean initialValue) {
+		return onOffBuilder().initially(initialValue);
+	}
+	
 	static {
 		BOOLEAN_VALUES = ImmutableList.of(Boolean.TRUE, Boolean.FALSE);
+	}
+	
+	@Override
+	public void setRequirements(List<BooleanSetting> requirements)
+	{
+		
 	}
 	
 	@Environment(EnvType.CLIENT)
@@ -149,7 +171,7 @@ public class CyclingButtonWidget<T> extends PressableWidget implements Orderable
 		
 		static <T> Values<T> of(Collection<T> values) {
 			final List<T> list = ImmutableList.copyOf(values);
-			return new Values<T>() {
+			return new Values<>() {
 				public List<T> getCurrent() {
 					return list;
 				}
@@ -163,12 +185,15 @@ public class CyclingButtonWidget<T> extends PressableWidget implements Orderable
 		static <T> Values<T> of(final BooleanSupplier alternativeToggle, List<T> defaults, List<T> alternatives) {
 			final List<T> list = ImmutableList.copyOf(defaults);
 			final List<T> list2 = ImmutableList.copyOf(alternatives);
-			return new Values<T>() {
-				public List<T> getCurrent() {
+			return new Values<>()
+			{
+				public List<T> getCurrent()
+				{
 					return alternativeToggle.getAsBoolean() ? list2 : list;
 				}
 				
-				public List<T> getDefaults() {
+				public List<T> getDefaults()
+				{
 					return list;
 				}
 			};
