@@ -36,7 +36,6 @@ public class ChoiceSetting extends AbstractSetting
 	public ChoiceSetting setChangeConsumer(Consumer<String> consume)
 	{
 		onChange = consume;
-		onChange.accept(getSelectedOptionName() + "|false");
 		return this;
 	}
 	
