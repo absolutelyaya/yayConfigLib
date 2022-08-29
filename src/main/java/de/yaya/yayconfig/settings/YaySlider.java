@@ -2,10 +2,10 @@ package de.yaya.yayconfig.settings;
 
 import com.google.common.collect.ImmutableList;
 import de.yaya.yayconfig.accessors.ClickableWidgetAccessor;
+import de.yaya.yayconfig.mojangOptions.DoubleOption;
 import de.yaya.yayconfig.screens.widgets.YaySliderWidget;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.option.DoubleOption;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;

@@ -1,14 +1,13 @@
 package de.yaya.yayconfig.settings;
 
 import de.yaya.yayconfig.accessors.ClickableWidgetAccessor;
+import de.yaya.yayconfig.mojangOptions.Option;
 import de.yaya.yayconfig.screens.settings.SettingsScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.option.GameOptions;
-import net.minecraft.client.option.Option;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class SubOptionsButtonOption extends Option
 		super(key);
 		this.settings = settings;
 		this.entry = entry;
-		this.label = new TranslatableText(key).append("...");
+		this.label = Text.translatable(key).append("...");
 		this.requirements = requirements;
 	}
 	

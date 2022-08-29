@@ -2,9 +2,7 @@ package de.yaya.yayconfig.settings;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.option.Option;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 
 @Environment(EnvType.CLIENT)
 public class SliderSetting extends AbstractSetting
@@ -96,9 +94,9 @@ public class SliderSetting extends AbstractSetting
 	public Text getButtonText()
 	{
 		if(displayPercent)
-			return new TranslatableText(translationKey).append(": " + (int)(SettingsStorage.getDouble(id) / max * 100) + "%");
+			return Text.translatable(translationKey).append(": " + (int)(SettingsStorage.getDouble(id) / max * 100) + "%");
 		else
-			return new TranslatableText(translationKey).append(": " + String.format("%." + decimals + "f", (SettingsStorage.getDouble(id))));
+			return Text.translatable(translationKey).append(": " + String.format("%." + decimals + "f", (SettingsStorage.getDouble(id))));
 	}
 	
 	@Override
@@ -113,7 +111,7 @@ public class SliderSetting extends AbstractSetting
 	}
 	
 	@Override
-	public Option asOption()
+	public YaySlider asOption()
 	{
 		return new YaySlider(translationKey, min, max, step, options -> SettingsStorage.getDouble(id),
 				(options, value) -> SettingsStorage.setDouble(id, value), requirements, (a, b) -> getButtonText(), softMin, softMax, () -> defaultValue);

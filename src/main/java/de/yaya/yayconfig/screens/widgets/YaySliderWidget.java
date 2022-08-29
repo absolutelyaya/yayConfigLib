@@ -1,19 +1,18 @@
 package de.yaya.yayconfig.screens.widgets;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import de.yaya.yayconfig.mojangOptions.DoubleOption;
+import de.yaya.yayconfig.mojangOptions.widgets.DoubleOptionSliderWidget;
 import de.yaya.yayconfig.settings.SettingsStorage;
 import de.yaya.yayconfig.settings.SliderSetting;
 import de.yaya.yayconfig.settings.YaySlider;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.gui.widget.DoubleOptionSliderWidget;
-import net.minecraft.client.option.DoubleOption;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.glfw.GLFW;
 
@@ -54,14 +53,14 @@ public class YaySliderWidget extends DoubleOptionSliderWidget
 		{
 			double min = SettingsStorage.getDouble(softMin.id) + ((YaySlider) option).getStep();
 			if(val < min - ((YaySlider) option).getStep())
-				updatePopup(new TranslatableText("popup.weathereffects.restricted-slider", new TranslatableText(softMin.translationKey)), true);
+				updatePopup(Text.translatable("popup.weathereffects.restricted-slider", Text.translatable(softMin.translationKey)), true);
 			val = Double.max(min, val);
 		}
 		if(softMax != null)
 		{
 			double max = SettingsStorage.getDouble(softMax.id) - ((YaySlider) option).getStep();
 			if(val > max + ((YaySlider) option).getStep())
-				updatePopup(new TranslatableText("popup.weathereffects.restricted-slider", new TranslatableText(softMax.translationKey)), true);
+				updatePopup(Text.translatable("popup.weathereffects.restricted-slider", Text.translatable(softMax.translationKey)), true);
 			val = Double.min(max, val);
 		}
 		this.value = (val - option.getMin()) / (option.getMax() - option.getMin());
@@ -92,7 +91,7 @@ public class YaySliderWidget extends DoubleOptionSliderWidget
 		applyValue();
 		updateMessage();
 		onRelease(0, 0);
-		updatePopup(new TranslatableText("popup.weathereffects.reset-slider"), false);
+		updatePopup(Text.translatable("popup.weathereffects.reset-slider"), false);
 	}
 	
 	void updatePopup(Text popup, boolean force)

@@ -1,6 +1,6 @@
 package de.yaya.yayconfig.settings;
 
-import net.minecraft.client.option.Option;
+import de.yaya.yayconfig.mojangOptions.Option;
 import net.minecraft.text.Text;
 
 import java.util.List;

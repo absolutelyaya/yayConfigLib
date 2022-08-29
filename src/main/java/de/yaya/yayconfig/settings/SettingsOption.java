@@ -1,8 +1,8 @@
 package de.yaya.yayconfig.settings;
 
+import de.yaya.yayconfig.mojangOptions.Option;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.option.Option;
 
 import java.util.List;
 

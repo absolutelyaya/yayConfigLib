@@ -7,10 +7,9 @@ import net.minecraft.client.gui.screen.option.OptionsScreen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.obfuscate.DontObfuscate;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 
 @DontObfuscate
-public abstract class AbstractWeatherSettingsScreen extends Screen
+public abstract class AbstractSettingsScreen extends Screen
 {
 	protected static boolean paused;
 	protected static boolean showBG = true;
@@ -19,7 +18,7 @@ public abstract class AbstractWeatherSettingsScreen extends Screen
 	protected YayCheckbox bgCheckBox;
 	protected YayCheckbox pauseCheckBox;
 	
-	protected AbstractWeatherSettingsScreen(Text title, Screen parent)
+	protected AbstractSettingsScreen(Text title, Screen parent)
 	{
 		super(title);
 		this.parent = parent;
@@ -34,9 +33,9 @@ public abstract class AbstractWeatherSettingsScreen extends Screen
 		if(client != null && client.world != null)
 		{
 			bgCheckBox = this.addDrawableChild(new YayCheckbox(this.width / 2 + 35, this.height - 28, 200, 20,
-					new TranslatableText("screen.yayconfig.options.showbg"), showBG, !showBG));
+					Text.translatable("screen.yayconfig.options.showbg"), showBG, !showBG));
 			pauseCheckBox = this.addDrawableChild(new YayCheckbox(this.width / 2 - 125, this.height - 28, 200, 20,
-					new TranslatableText("screen.yayconfig.options.gamepaused"), paused, !showBG));
+					Text.translatable("screen.yayconfig.options.gamepaused"), paused, !showBG));
 		}
 	}
 	

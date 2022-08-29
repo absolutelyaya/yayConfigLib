@@ -1,8 +1,8 @@
 package de.yaya.yayconfig.screens.widgets;
 
+import de.yaya.yayconfig.mojangOptions.widgets.ButtonListWidget;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Element;
-import net.minecraft.client.gui.widget.ButtonListWidget;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;

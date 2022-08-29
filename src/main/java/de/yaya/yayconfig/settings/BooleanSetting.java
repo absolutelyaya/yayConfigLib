@@ -1,11 +1,11 @@
 package de.yaya.yayconfig.settings;
 
+import de.yaya.yayconfig.mojangOptions.Option;
+import de.yaya.yayconfig.mojangOptions.widgets.CyclingButtonWidget;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gui.widget.CyclingButtonWidget;
-import net.minecraft.client.option.Option;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 
 @Environment(EnvType.CLIENT)
 public class BooleanSetting extends AbstractSetting
@@ -48,7 +48,7 @@ public class BooleanSetting extends AbstractSetting
 	@Override
 	public Text getButtonText()
 	{
-		return new TranslatableText(translationKey, defaultValue);
+		return Text.translatable(translationKey, defaultValue);
 	}
 	
 	@Override
@@ -66,8 +66,13 @@ public class BooleanSetting extends AbstractSetting
 	public Option asOption()
 	{
 		return new YayCycler<>(translationKey,
-				ignored -> SettingsStorage.getBoolean(id), (ignored, option, value) -> SettingsStorage.setBoolean(id, value),
-				CyclingButtonWidget::onOffBuilder, requirements);
+				ignored -> SettingsStorage.getBoolean(id), (ignored, option, value) -> SettingsStorage.setBoolean(id, (boolean)value),
+				this::onOffBuilder, requirements);
+	}
+	
+	public CyclingButtonWidget.Builder<Boolean> onOffBuilder()
+	{
+		return (new CyclingButtonWidget.Builder<>(value -> value ? ScreenTexts.ON : ScreenTexts.OFF));
 	}
 	
 	@Override

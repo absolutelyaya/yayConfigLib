@@ -1,9 +1,9 @@
 package de.yaya.yayconfig.settings;
 
+import de.yaya.yayconfig.mojangOptions.Option;
 import de.yaya.yayconfig.utilities.TranslationUtil;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.option.GameOptions;
-import net.minecraft.client.option.Option;
 
 import java.util.ArrayList;
 import java.util.List;

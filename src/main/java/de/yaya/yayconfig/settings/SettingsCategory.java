@@ -1,10 +1,10 @@
 package de.yaya.yayconfig.settings;
 
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 
 public interface SettingsCategory
 {
-	TranslatableText getTitle();
+	Text getTitle();
 	
 	SettingsCategory[] getValues();
 }

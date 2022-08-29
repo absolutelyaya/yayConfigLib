@@ -1,22 +1,21 @@
 package de.yaya.yayconfig.screens.settings;
 
+import de.yaya.yayconfig.mojangOptions.Option;
+import de.yaya.yayconfig.mojangOptions.widgets.ButtonListWidget;
 import de.yaya.yayconfig.settings.PerEntryOption;
 import de.yaya.yayconfig.settings.Settings;
 import de.yaya.yayconfig.screens.widgets.YayButtonList;
 import de.yaya.yayconfig.settings.SettingsCategory;
 import de.yaya.yayconfig.utilities.TranslationUtil;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ScreenTexts;
-import net.minecraft.client.gui.widget.ButtonListWidget;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.option.Option;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingsScreen extends AbstractWeatherSettingsScreen
+public class SettingsScreen extends AbstractSettingsScreen
 {
 	private final SettingsCategory category;
 	private final PerEntryOption<?> settings;
@@ -34,7 +33,7 @@ public class SettingsScreen extends AbstractWeatherSettingsScreen
 	
 	public SettingsScreen(Screen parent, PerEntryOption<?> settings, Enum<?> entry)
 	{
-		super(new TranslatableText(TranslationUtil.getTranslationKey("screen",
+		super(Text.translatable(TranslationUtil.getTranslationKey("screen",
 				"fog.biome." + entry.name()).toLowerCase().replace("_", "-")), parent);
 		this.category = null;
 		this.settings = settings;
@@ -73,7 +72,7 @@ public class SettingsScreen extends AbstractWeatherSettingsScreen
 		
 		this.addDrawableChild(new ButtonWidget(this.width / 2 - 100,
 				this.height - (client != null && client.world != null ? 56 : 26), 200, 20,
-				ScreenTexts.DONE, button -> this.client.setScreen(this.parent)));
+				Text.translatable("gui.done"), button -> this.client.setScreen(this.parent)));
 	}
 	
 	@Override
@@ -86,10 +85,10 @@ public class SettingsScreen extends AbstractWeatherSettingsScreen
 		{
 			int x = width / 2;
 			int y = height / 2;
-			int length = client.textRenderer.getWidth(new TranslatableText("screen.weatherEffects.options.empty"));
+			int length = client.textRenderer.getWidth(Text.translatable("screen.weatherEffects.options.empty"));
 			if(!showBG && client.world != null)
 				fill(matrices, x - (length / 2 + 3), y - 7, x + length / 2 + 3, y + 7, -1072689136);
-			drawCenteredText(matrices, client.textRenderer, new TranslatableText("screen.weatherEffects.options.empty"), x, y - 4, 0xFFFFFFFF);
+			drawCenteredText(matrices, client.textRenderer, Text.translatable("screen.weatherEffects.options.empty"), x, y - 4, 0xFFFFFFFF);
 		}
 	}
 }
