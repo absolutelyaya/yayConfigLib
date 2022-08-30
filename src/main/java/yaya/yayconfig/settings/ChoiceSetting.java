@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+//TODO: add optional sub-categories divided using a centered Label
+//TODO: add tooltips
 @Environment(EnvType.CLIENT)
 public class ChoiceSetting extends AbstractSetting
 {

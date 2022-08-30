@@ -2,6 +2,7 @@ package yaya.yayconfig.mojangOptions.widgets;
 
 import java.util.List;
 
+import yaya.yayconfig.accessors.ClickableWidgetAccessor;
 import yaya.yayconfig.mojangOptions.DoubleOption;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -9,9 +10,11 @@ import net.minecraft.client.gui.widget.OptionSliderWidget;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.OrderableTooltip;
 import net.minecraft.text.OrderedText;
+import yaya.yayconfig.settings.BooleanSetting;
 
 @Environment(EnvType.CLIENT)
-public class DoubleOptionSliderWidget extends OptionSliderWidget implements OrderableTooltip {
+public class DoubleOptionSliderWidget extends OptionSliderWidget implements OrderableTooltip, ClickableWidgetAccessor
+{
 	private final DoubleOption option;
 	private final List<OrderedText> orderedTooltip;
 	
@@ -33,5 +36,11 @@ public class DoubleOptionSliderWidget extends OptionSliderWidget implements Orde
 	
 	public List<OrderedText> getOrderedTooltip() {
 		return this.orderedTooltip;
+	}
+	
+	@Override
+	public void setRequirements(List<BooleanSetting> requirements)
+	{
+	
 	}
 }
