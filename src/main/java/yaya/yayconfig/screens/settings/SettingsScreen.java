@@ -1,5 +1,6 @@
 package yaya.yayconfig.screens.settings;
 
+import net.minecraft.screen.ScreenTexts;
 import yaya.yayconfig.mojangOptions.Option;
 import yaya.yayconfig.mojangOptions.widgets.ButtonListWidget;
 import yaya.yayconfig.settings.PerEntryOption;
@@ -72,7 +73,7 @@ public class SettingsScreen extends AbstractSettingsScreen
 		
 		this.addDrawableChild(new ButtonWidget(this.width / 2 - 100,
 				this.height - (client != null && client.world != null ? 56 : 26), 200, 20,
-				Text.translatable("gui.done"), button -> this.client.setScreen(this.parent)));
+				ScreenTexts.DONE,button -> this.client.setScreen(this.parent)));
 	}
 	
 	@Override
@@ -85,10 +86,10 @@ public class SettingsScreen extends AbstractSettingsScreen
 		{
 			int x = width / 2;
 			int y = height / 2;
-			int length = client.textRenderer.getWidth(Text.translatable("screen.weatherEffects.options.empty"));
+			int length = client.textRenderer.getWidth(Text.translatable("screen.yayconfig.options.empty"));
 			if(!showBG && client.world != null)
 				fill(matrices, x - (length / 2 + 3), y - 7, x + length / 2 + 3, y + 7, -1072689136);
-			drawCenteredText(matrices, client.textRenderer, Text.translatable("screen.weatherEffects.options.empty"), x, y - 4, 0xFFFFFFFF);
+			drawCenteredText(matrices, client.textRenderer, Text.translatable("screen.yayconfig.options.empty"), x, y - 4, 0xFFFFFFFF);
 		}
 	}
 }

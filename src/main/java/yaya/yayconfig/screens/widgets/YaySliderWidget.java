@@ -53,14 +53,14 @@ public class YaySliderWidget extends DoubleOptionSliderWidget
 		{
 			double min = SettingsStorage.getDouble(softMin.id) + ((YaySlider) option).getStep();
 			if(val < min - ((YaySlider) option).getStep())
-				updatePopup(Text.translatable("popup.weathereffects.restricted-slider", Text.translatable(softMin.translationKey)), true);
+				updatePopup(Text.translatable("popup.yayconfig.restricted-slider", Text.translatable(softMin.translationKey)), true);
 			val = Double.max(min, val);
 		}
 		if(softMax != null)
 		{
 			double max = SettingsStorage.getDouble(softMax.id) - ((YaySlider) option).getStep();
 			if(val > max + ((YaySlider) option).getStep())
-				updatePopup(Text.translatable("popup.weathereffects.restricted-slider", Text.translatable(softMax.translationKey)), true);
+				updatePopup(Text.translatable("popup.yayconfig.restricted-slider", Text.translatable(softMax.translationKey)), true);
 			val = Double.min(max, val);
 		}
 		this.value = (val - option.getMin()) / (option.getMax() - option.getMin());
@@ -91,7 +91,7 @@ public class YaySliderWidget extends DoubleOptionSliderWidget
 		applyValue();
 		updateMessage();
 		onRelease(0, 0);
-		updatePopup(Text.translatable("popup.weathereffects.reset-slider"), false);
+		updatePopup(Text.translatable("popup.yayconfig.reset-slider"), false);
 	}
 	
 	void updatePopup(Text popup, boolean force)

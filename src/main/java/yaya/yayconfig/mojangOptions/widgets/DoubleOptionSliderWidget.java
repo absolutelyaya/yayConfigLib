@@ -19,7 +19,7 @@ public class DoubleOptionSliderWidget extends OptionSliderWidget implements Orde
 	private final List<OrderedText> orderedTooltip;
 	
 	public DoubleOptionSliderWidget(GameOptions gameOptions, int x, int y, int width, int height, DoubleOption option, List<OrderedText> orderedTooltip) {
-		super(gameOptions, x, y, width, height, (double)((float)option.getRatio(option.get(gameOptions))));
+		super(gameOptions, x, y, width, height, ((float)option.getRatio(option.get(gameOptions))));
 		this.option = option;
 		this.orderedTooltip = orderedTooltip;
 		this.updateMessage();

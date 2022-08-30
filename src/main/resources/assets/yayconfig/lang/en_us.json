@@ -1,5 +1,8 @@
 {
   "screen.yayconfig.options.gamepaused": "Pause",
   "screen.yayconfig.options.showbg": "Background",
-  "screen.yayconfig.options.empty": "This is currently empty..."
+  "screen.yayconfig.options.empty": "This is currently empty...",
+
+  "popup.yayconfig.reset-slider": "Slider reset to default!",
+  "popup.yayconfig.restricted-slider": "Slider restricted by '%s'!"
 }

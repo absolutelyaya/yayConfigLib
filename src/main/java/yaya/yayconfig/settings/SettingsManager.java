@@ -108,7 +108,7 @@ public class SettingsManager
 		}
 		catch (Exception e)
 		{
-			System.err.println("Failed to load Weather Effects settings.");
+			System.err.println("Failed to load " + modid + " settings.");
 			e.printStackTrace();
 			Settings.applyDefaults();
 		}
@@ -134,7 +134,7 @@ public class SettingsManager
 		}
 		catch (IOException e)
 		{
-			System.err.println("Failed to save Weather Effects settings file.");
+			System.err.println("Failed to save " + modid + " settings file.");
 			e.printStackTrace();
 		}
 	}
