@@ -1,10 +1,11 @@
 package yaya.yayconfig.settings;
 
-import yaya.yayconfig.mojangOptions.Option;
-import yaya.yayconfig.mojangOptions.widgets.CyclingButtonWidget;
+import yaya.yayconfig.settings.options.Option;
+import yaya.yayconfig.screens.widgets.CyclingButtonWidget;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.text.Text;
+import yaya.yayconfig.settings.options.SettingsOption;
 
 @Environment(EnvType.CLIENT)
 public class BooleanSetting extends AbstractSetting
@@ -64,8 +65,8 @@ public class BooleanSetting extends AbstractSetting
 	@Override
 	public Option asOption()
 	{
-		return new YayCycler<>(translationKey,
-				ignored -> SettingsStorage.getBoolean(id), (ignored, option, value) -> SettingsStorage.setBoolean(id, value),
+		return new YayCycler<>(translationKey, this,
+				() -> SettingsStorage.getBoolean(id), (ignored, value) -> SettingsStorage.setBoolean(id, value),
 				CyclingButtonWidget::onOffBuilder, requirements);
 	}
 	

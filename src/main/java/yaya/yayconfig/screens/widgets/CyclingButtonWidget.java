@@ -1,9 +1,8 @@
-package yaya.yayconfig.mojangOptions.widgets;
+package yaya.yayconfig.screens.widgets;
 
 import com.google.common.collect.ImmutableList;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -25,7 +24,6 @@ import yaya.yayconfig.settings.BooleanSetting;
 @Environment(EnvType.CLIENT)
 public class CyclingButtonWidget<T> extends PressableWidget implements OrderableTooltip, ClickableWidgetAccessor
 {
-	static final BooleanSupplier HAS_ALT_DOWN = Screen::hasAltDown;
 	private static final List<Boolean> BOOLEAN_VALUES;
 	private final Text optionText;
 	private int index;
@@ -82,16 +80,6 @@ public class CyclingButtonWidget<T> extends PressableWidget implements Orderable
 		return true;
 	}
 	
-	public void setValue(T value) {
-		List<T> list = this.values.getCurrent();
-		int i = list.indexOf(value);
-		if (i != -1) {
-			this.index = i;
-		}
-		
-		this.internalSetValue(value);
-	}
-	
 	private void internalSetValue(T value) {
 		Text text = this.composeText(value);
 		this.setMessage(text);
@@ -99,19 +87,15 @@ public class CyclingButtonWidget<T> extends PressableWidget implements Orderable
 	}
 	
 	private Text composeText(T value) {
-		return (Text)(this.optionTextOmitted ? (Text)this.valueToText.apply(value) : this.composeGenericOptionText(value));
+		return this.optionTextOmitted ? this.valueToText.apply(value) : this.composeGenericOptionText(value);
 	}
 	
 	private MutableText composeGenericOptionText(T value) {
-		return ScreenTexts.composeGenericOptionText(this.optionText, (Text)this.valueToText.apply(value));
-	}
-	
-	public T getValue() {
-		return this.value;
+		return ScreenTexts.composeGenericOptionText(this.optionText, this.valueToText.apply(value));
 	}
 	
 	protected MutableText getNarrationMessage() {
-		return (MutableText)this.narrationMessageFactory.apply(this);
+		return this.narrationMessageFactory.apply(this);
 	}
 	
 	public void appendNarrations(NarrationMessageBuilder builder) {
@@ -136,31 +120,19 @@ public class CyclingButtonWidget<T> extends PressableWidget implements Orderable
 		return this.tooltipFactory.apply(this.value);
 	}
 	
-	public static <T> Builder<T> builder(Function<T, Text> valueToText) {
-		return new Builder<>(valueToText);
-	}
-	
-	
-	public static Builder<Boolean> onOffBuilder(Text on, Text off) {
-		return (new Builder<Boolean>((value) -> value ? on : off)).values(BOOLEAN_VALUES);
-	}
-	
 	public static Builder<Boolean> onOffBuilder() {
 		return (new Builder<Boolean>((value) -> value ? ScreenTexts.ON : ScreenTexts.OFF)).values(BOOLEAN_VALUES);
 	}
 	
-	public static Builder<Boolean> onOffBuilder(boolean initialValue) {
-		return onOffBuilder().initially(initialValue);
-	}
-	
-	static {
+	static
+	{
 		BOOLEAN_VALUES = ImmutableList.of(Boolean.TRUE, Boolean.FALSE);
 	}
 	
 	@Override
 	public void setRequirements(List<BooleanSetting> requirements)
 	{
-		
+		//TODO
 	}
 	
 	@Environment(EnvType.CLIENT)
@@ -181,23 +153,6 @@ public class CyclingButtonWidget<T> extends PressableWidget implements Orderable
 				}
 			};
 		}
-		
-		static <T> Values<T> of(final BooleanSupplier alternativeToggle, List<T> defaults, List<T> alternatives) {
-			final List<T> list = ImmutableList.copyOf(defaults);
-			final List<T> list2 = ImmutableList.copyOf(alternatives);
-			return new Values<>()
-			{
-				public List<T> getCurrent()
-				{
-					return alternativeToggle.getAsBoolean() ? list2 : list;
-				}
-				
-				public List<T> getDefaults()
-				{
-					return list;
-				}
-			};
-		}
 	}
 	
 	@Environment(EnvType.CLIENT)
@@ -212,7 +167,7 @@ public class CyclingButtonWidget<T> extends PressableWidget implements Orderable
 		private T value;
 		private final Function<T, Text> valueToText;
 		private SimpleOption.TooltipFactory<T> tooltipFactory = (value) -> ImmutableList.of();
-		private Function<CyclingButtonWidget<T>, MutableText> narrationMessageFactory = CyclingButtonWidget::getGenericNarrationMessage;
+		private final Function<CyclingButtonWidget<T>, MutableText> narrationMessageFactory = CyclingButtonWidget::getGenericNarrationMessage;
 		private Values<T> values = CyclingButtonWidget.Values.of(ImmutableList.of());
 		private boolean optionTextOmitted;
 		
@@ -222,19 +177,6 @@ public class CyclingButtonWidget<T> extends PressableWidget implements Orderable
 		
 		public Builder<T> values(Collection<T> values) {
 			return this.values(CyclingButtonWidget.Values.of(values));
-		}
-		
-		@SafeVarargs
-		public final Builder<T> values(T... values) {
-			return this.values(ImmutableList.copyOf(values));
-		}
-		
-		public Builder<T> values(List<T> defaults, List<T> alternatives) {
-			return this.values(CyclingButtonWidget.Values.of(CyclingButtonWidget.HAS_ALT_DOWN, defaults, alternatives));
-		}
-		
-		public Builder<T> values(BooleanSupplier alternativeToggle, List<T> defaults, List<T> alternatives) {
-			return this.values(CyclingButtonWidget.Values.of(alternativeToggle, defaults, alternatives));
 		}
 		
 		public Builder<T> values(Values<T> values) {
@@ -255,21 +197,6 @@ public class CyclingButtonWidget<T> extends PressableWidget implements Orderable
 			}
 			
 			return this;
-		}
-		
-		public Builder<T> narration(Function<CyclingButtonWidget<T>, MutableText> narrationMessageFactory) {
-			this.narrationMessageFactory = narrationMessageFactory;
-			return this;
-		}
-		
-		public Builder<T> omitKeyText() {
-			this.optionTextOmitted = true;
-			return this;
-		}
-		
-		public CyclingButtonWidget<T> build(int x, int y, int width, int height, Text optionText) {
-			return this.build(x, y, width, height, optionText, (button, value) -> {
-			});
 		}
 		
 		public CyclingButtonWidget<T> build(int x, int y, int width, int height, Text optionText, UpdateCallback<T> callback) {

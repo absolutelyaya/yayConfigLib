@@ -1,8 +1,9 @@
 package yaya.yayconfig.settings;
 
-import yaya.yayconfig.mojangOptions.Option;
+import yaya.yayconfig.settings.options.Option;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import yaya.yayconfig.settings.options.SettingsOption;
 
 import java.util.ArrayList;
 import java.util.HashMap;

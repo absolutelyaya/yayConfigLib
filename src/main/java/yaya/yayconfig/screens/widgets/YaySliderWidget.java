@@ -1,17 +1,18 @@
 package yaya.yayconfig.screens.widgets;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import yaya.yayconfig.mojangOptions.DoubleOption;
-import yaya.yayconfig.mojangOptions.widgets.DoubleOptionSliderWidget;
+import net.minecraft.client.gui.widget.SliderWidget;
+import net.minecraft.text.OrderedText;
+import yaya.yayconfig.accessors.ClickableWidgetAccessor;
+import yaya.yayconfig.settings.BooleanSetting;
+import yaya.yayconfig.settings.options.DoubleOption;
 import yaya.yayconfig.settings.SettingsStorage;
 import yaya.yayconfig.settings.SliderSetting;
 import yaya.yayconfig.settings.YaySlider;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.glfw.GLFW;
@@ -19,30 +20,23 @@ import org.lwjgl.glfw.GLFW;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class YaySliderWidget extends DoubleOptionSliderWidget
+public class YaySliderWidget extends SliderWidget implements ClickableWidgetAccessor
 {
 	private final DoubleOption option;
-	private final SliderSetting softMin, softMax;
+	private final SliderSetting setting, softMin, softMax;
 	private final Supplier<Double> defaultSupplier;
 	
 	private float popupOpacity;
 	private Text popupMessage;
 	
-	public YaySliderWidget(GameOptions gameOptions, int x, int y, int width, int height, DoubleOption option, List<OrderedText> orderedTooltip, SliderSetting softMin, SliderSetting softMax, Supplier<Double> defaultSupplier)
+	public YaySliderWidget(int x, int y, int width, int height, DoubleOption option, List<OrderedText> tooltips, SliderSetting setting)
 	{
-		super(gameOptions, x, y, width, height, option, orderedTooltip);
+		super(x, y, width, height, setting.getButtonText(), option.getRatio(SettingsStorage.getDouble(option.getId())));
 		this.option = option;
-		this.softMin = softMin;
-		this.softMax = softMax;
-		this.defaultSupplier = defaultSupplier;
-	}
-	
-	public void refresh(String id)
-	{
-		double val =  SettingsStorage.getDouble(id);
-		this.value = (val - option.getMin()) / (option.getMax() - option.getMin());
-		applyValue();
-		updateMessage();
+		this.setting = setting;
+		this.softMin = setting.getSoftMin();
+		this.softMax = setting.getSoftMax();
+		this.defaultSupplier = setting.getDefaultSupplier();
 	}
 	
 	@Override
@@ -64,8 +58,7 @@ public class YaySliderWidget extends DoubleOptionSliderWidget
 			val = Double.min(max, val);
 		}
 		this.value = (val - option.getMin()) / (option.getMax() - option.getMin());
-		this.option.set(this.options, val);
-		this.options.write();
+		this.option.set(val);
 	}
 	
 	@Override
@@ -83,6 +76,12 @@ public class YaySliderWidget extends DoubleOptionSliderWidget
 		if(keyCode == GLFW.GLFW_KEY_R)
 			reset();
 		return super.keyPressed(keyCode, scanCode, modifiers);
+	}
+	
+	@Override
+	protected void updateMessage()
+	{
+		setMessage(setting.getButtonText());
 	}
 	
 	void reset()
@@ -122,11 +121,18 @@ public class YaySliderWidget extends DoubleOptionSliderWidget
 	}
 	
 	@Override
-	protected void renderBackground(MatrixStack matrices, MinecraftClient client, int mouseX, int mouseY) {
+	protected void renderBackground(MatrixStack matrices, MinecraftClient client, int mouseX, int mouseY)
+	{
 		RenderSystem.setShaderTexture(0, WIDGETS_TEXTURE);
 		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, alpha);
 		int i = (active && visible ? (this.isHovered() ? 2 : 1) * 20 : 0);
 		this.drawTexture(matrices, this.x + (int)(this.value * (double)(this.width - 8)), this.y, 0, 46 + i, 4, 20);
 		this.drawTexture(matrices, this.x + (int)(this.value * (double)(this.width - 8)) + 4, this.y, 196, 46 + i, 4, 20);
+	}
+	
+	@Override
+	public void setRequirements(List<BooleanSetting> requirements)
+	{
+		//TODO
 	}
 }

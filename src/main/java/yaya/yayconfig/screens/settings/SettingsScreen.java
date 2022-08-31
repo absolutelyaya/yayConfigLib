@@ -1,9 +1,9 @@
 package yaya.yayconfig.screens.settings;
 
 import net.minecraft.screen.ScreenTexts;
-import yaya.yayconfig.mojangOptions.Option;
-import yaya.yayconfig.mojangOptions.widgets.ButtonListWidget;
-import yaya.yayconfig.settings.PerEntryOption;
+import yaya.yayconfig.settings.options.Option;
+import yaya.yayconfig.screens.widgets.ButtonListWidget;
+import yaya.yayconfig.settings.options.PerEntryOption;
 import yaya.yayconfig.settings.Settings;
 import yaya.yayconfig.screens.widgets.YayButtonList;
 import yaya.yayconfig.settings.SettingsCategory;

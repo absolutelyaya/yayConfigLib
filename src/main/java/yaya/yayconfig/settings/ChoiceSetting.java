@@ -1,10 +1,11 @@
 package yaya.yayconfig.settings;
 
-import yaya.yayconfig.mojangOptions.Option;
-import yaya.yayconfig.mojangOptions.widgets.CyclingButtonWidget;
+import yaya.yayconfig.settings.options.Option;
+import yaya.yayconfig.screens.widgets.CyclingButtonWidget;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.text.Text;
+import yaya.yayconfig.settings.options.SettingsOption;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,9 +106,9 @@ public class ChoiceSetting extends AbstractSetting
 	@Override
 	public Option asOption()
 	{
-		return new YayCycler<>(translationKey,
-				ignored -> SettingsStorage.getChoice(id)[0],
-				(ignored, option, value) ->
+		return new YayCycler<>(translationKey, this,
+				() -> SettingsStorage.getChoice(id)[0],
+				(option, value) ->
 				{
 					SettingsStorage.setChoice(id, value, options.size());
 					if(onChange != null)
@@ -116,7 +117,8 @@ public class ChoiceSetting extends AbstractSetting
 				this::choiceBuilder, requirements);
 	}
 	
-	public CyclingButtonWidget.Builder<Integer> choiceBuilder() {
+	public CyclingButtonWidget.Builder<Integer> choiceBuilder()
+	{
 		return (new CyclingButtonWidget.Builder<Integer>(value -> Text.of(options.get(value % options.size())))).values(getValues());
 	}
 	

@@ -1,5 +1,6 @@
 package yaya.yayconfig.settings;
 
+import yaya.yayconfig.settings.options.SettingsOption;
 import yaya.yayconfig.utilities.TranslationUtil;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

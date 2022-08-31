@@ -3,6 +3,9 @@ package yaya.yayconfig.settings;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.text.Text;
+import yaya.yayconfig.settings.options.SettingsOption;
+
+import java.util.function.Supplier;
 
 @Environment(EnvType.CLIENT)
 public class SliderSetting extends AbstractSetting
@@ -113,8 +116,7 @@ public class SliderSetting extends AbstractSetting
 	@Override
 	public YaySlider asOption()
 	{
-		return new YaySlider(translationKey, min, max, step, options -> SettingsStorage.getDouble(id),
-				(options, value) -> SettingsStorage.setDouble(id, value), requirements, (a, b) -> getButtonText(), softMin, softMax, () -> defaultValue);
+		return new YaySlider(translationKey, this, min, max, step, requirements);
 	}
 	
 	@Override
@@ -135,5 +137,20 @@ public class SliderSetting extends AbstractSetting
 	public SettingsOption addIDPrefix(String prefix)
 	{
 		return new SliderSetting(prefix + "." + id, defaultValue, min, max, step, decimals, id, setDefault);
+	}
+	
+	public SliderSetting getSoftMax()
+	{
+		return softMax;
+	}
+	
+	public SliderSetting getSoftMin()
+	{
+		return softMin;
+	}
+	
+	public Supplier<Double> getDefaultSupplier()
+	{
+		return () -> defaultValue;
 	}
 }

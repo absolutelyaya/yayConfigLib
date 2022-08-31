@@ -1,6 +1,8 @@
-package yaya.yayconfig.settings;
+package yaya.yayconfig.settings.options;
 
-import yaya.yayconfig.mojangOptions.Option;
+import yaya.yayconfig.settings.AbstractSetting;
+import yaya.yayconfig.settings.BooleanSetting;
+import yaya.yayconfig.settings.SliderSetting;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 

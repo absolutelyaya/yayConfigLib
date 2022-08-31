@@ -1,6 +1,5 @@
 package yaya.yayconfig.screens.widgets;
 
-import yaya.yayconfig.mojangOptions.widgets.ButtonListWidget;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.widget.ClickableWidget;

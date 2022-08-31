@@ -1,9 +1,9 @@
-package yaya.yayconfig.settings;
+package yaya.yayconfig.settings.options;
 
-import yaya.yayconfig.mojangOptions.Option;
+import yaya.yayconfig.settings.AbstractSetting;
+import yaya.yayconfig.settings.BooleanSetting;
 import yaya.yayconfig.utilities.TranslationUtil;
 import net.minecraft.client.gui.widget.ClickableWidget;
-import net.minecraft.client.option.GameOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class PerEntryOption<E extends Enum<E>> extends Option
 	
 	public PerEntryOption(String id, Class<E> enumClass, List<AbstractSetting> settings, List<E> excludedEntries, List<BooleanSetting> requirements)
 	{
-		super(id);
+		super(id, null);
 		this.enumClass = enumClass;
 		this.settings = settings;
 		this.id = id;
@@ -52,7 +52,7 @@ public class PerEntryOption<E extends Enum<E>> extends Option
 	}
 	
 	@Override
-	public ClickableWidget createButton(GameOptions options, int x, int y, int width)
+	public ClickableWidget createButton(int x, int y, int width)
 	{
 		return null;
 	}

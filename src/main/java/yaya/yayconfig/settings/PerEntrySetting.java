@@ -1,7 +1,9 @@
 package yaya.yayconfig.settings;
 
-import yaya.yayconfig.mojangOptions.Option;
+import yaya.yayconfig.settings.options.Option;
 import net.minecraft.text.Text;
+import yaya.yayconfig.settings.options.PerEntryOption;
+import yaya.yayconfig.settings.options.SettingsOption;
 
 import java.util.List;
 
