@@ -81,4 +81,9 @@ public abstract class AbstractSettingsScreen extends Screen
 		super.removed();
 		SettingsManager.save();
 	}
+	
+	public boolean isShowingBG()
+	{
+		return showBG;
+	}
 }

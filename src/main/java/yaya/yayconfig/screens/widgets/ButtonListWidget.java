@@ -2,6 +2,8 @@ package yaya.yayconfig.screens.widgets;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +17,7 @@ import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.gui.widget.ElementListWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import org.jetbrains.annotations.Nullable;
+import yaya.yayconfig.settings.options.SubCategoryOption;
 
 @Environment(EnvType.CLIENT)
 public class ButtonListWidget extends ElementListWidget<ButtonListWidget.ButtonEntry> {
@@ -23,9 +26,9 @@ public class ButtonListWidget extends ElementListWidget<ButtonListWidget.ButtonE
 		this.centerListVertically = false;
 	}
 	
-	public int addSingleOptionEntry(Option option)
+	public void addSingleOptionEntry(Option option)
 	{
-		return this.addEntry(ButtonListWidget.ButtonEntry.create(this.width, option));
+		this.addEntry(ButtonEntry.create(this.width, option));
 	}
 	
 	public void addOptionEntry(Option firstOption, @Nullable Option secondOption)
@@ -33,9 +36,20 @@ public class ButtonListWidget extends ElementListWidget<ButtonListWidget.ButtonE
 		this.addEntry(ButtonListWidget.ButtonEntry.create(this.width, firstOption, secondOption));
 	}
 	
-	public void addAll(Option[] options) {
-		for(int i = 0; i < options.length; i += 2) {
-			this.addOptionEntry(options[i], i < options.length - 1 ? options[i + 1] : null);
+	public void addAll(List<Option> options)
+	{
+		List<String> categories = new ArrayList<>(List.of(""));
+		for (Option o : options)
+			if(!categories.contains(o.getSubCategory()))
+				categories.add(o.getSubCategory());
+		
+		for (String cat : categories)
+		{
+			Option[] filteredOptions = options.stream().filter(i -> i.getSubCategory().equals(cat)).toArray(Option[]::new);
+			if(cat.length() > 0)
+				this.addSingleOptionEntry(new SubCategoryOption(cat));
+			for(int i = 0; i < filteredOptions.length; i += 2)
+				this.addOptionEntry(filteredOptions[i], i < filteredOptions.length - 1 ? filteredOptions[i + 1] : null);
 		}
 	}
 	

@@ -16,7 +16,7 @@ public class Settings
 	protected static final HashMap<SettingsCategory, List<AbstractSetting>> SETTINGS = new HashMap<>();
 	
 	//Peset
-	public static final ChoiceSetting PRESET = new ChoiceSetting("general.preset", List.of("a", "b", "c", "d"), true)
+	public static final ChoiceSetting PRESET = new ChoiceSetting("general.preset", List.of("a", "b", "c", "d"), "", true)
 			.setChangeConsumer(Settings::applyPreset);
 	
 	public Settings(Class<? extends SettingsCategory> category)

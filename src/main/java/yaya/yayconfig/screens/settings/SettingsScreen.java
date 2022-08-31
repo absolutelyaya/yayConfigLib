@@ -64,7 +64,7 @@ public class SettingsScreen extends AbstractSettingsScreen
 		}
 		else
 			options.addAll(List.of(settings.getOptions(entry)));
-		this.list.addAll(options.toArray(Option[]::new));
+		this.list.addAll(options);
 		this.addSelectableChild(this.list);
 		this.list.setRenderBackground(false);
 		this.list.setRenderHorizontalShadows(false);

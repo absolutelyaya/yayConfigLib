@@ -12,17 +12,17 @@ public class BooleanSetting extends AbstractSetting
 {
 	public boolean defaultValue;
 	
-	public BooleanSetting(String id, boolean defaultValue, boolean setDefault)
+	public BooleanSetting(String id, boolean defaultValue, String category, boolean setDefault)
 	{
-		super(id, setDefault);
+		super(id, category, setDefault);
 		this.defaultValue = defaultValue;
 		if(setDefault)
 			setDefault();
 	}
 	
-	public BooleanSetting(String id, boolean defaultValue, String name, boolean setDefault)
+	public BooleanSetting(String id, boolean defaultValue, String name, String category, boolean setDefault)
 	{
-		super(id, name, setDefault);
+		super(id, name, category, setDefault);
 		this.defaultValue = defaultValue;
 		if(setDefault)
 			setDefault();

@@ -19,9 +19,9 @@ public class SliderSetting extends AbstractSetting
 	
 	private SliderSetting softMin, softMax;
 	
-	public SliderSetting(String id, double defaultValue, double min, double max, float step, boolean setDefault)
+	public SliderSetting(String id, double defaultValue, double min, double max, float step, String category, boolean setDefault)
 	{
-		super(id, setDefault);
+		super(id, category, setDefault);
 		this.defaultValue = defaultValue;
 		this.min = min;
 		this.max = max;
@@ -32,9 +32,9 @@ public class SliderSetting extends AbstractSetting
 			setDefault();
 	}
 	
-	public SliderSetting(String id, double defaultValue, double min, double max, float step, String name, boolean setDefault)
+	public SliderSetting(String id, double defaultValue, double min, double max, float step, String name, String category, boolean setDefault)
 	{
-		super(id, name, setDefault);
+		super(id, name, category, setDefault);
 		this.defaultValue = defaultValue;
 		this.min = min;
 		this.max = max;
@@ -45,9 +45,9 @@ public class SliderSetting extends AbstractSetting
 			setDefault();
 	}
 	
-	public SliderSetting(String id, double defaultValue, double min, double max, float step, int decimals, boolean setDefault)
+	public SliderSetting(String id, double defaultValue, double min, double max, float step, int decimals, String category, boolean setDefault)
 	{
-		super(id, setDefault);
+		super(id, category, setDefault);
 		this.defaultValue = defaultValue;
 		this.min = min;
 		this.max = max;
@@ -58,9 +58,9 @@ public class SliderSetting extends AbstractSetting
 			setDefault();
 	}
 	
-	public SliderSetting(String id, double defaultValue, double min, double max, float step, int decimals, String name, boolean setDefault)
+	public SliderSetting(String id, double defaultValue, double min, double max, float step, int decimals, String name, String category, boolean setDefault)
 	{
-		super(id, name, setDefault);
+		super(id, name, category, setDefault);
 		this.defaultValue = defaultValue;
 		this.min = min;
 		this.max = max;

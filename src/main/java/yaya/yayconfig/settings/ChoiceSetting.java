@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-//TODO: add optional sub-categories divided using a centered Label
 //TODO: add tooltips
 @Environment(EnvType.CLIENT)
 public class ChoiceSetting extends AbstractSetting
@@ -19,17 +18,17 @@ public class ChoiceSetting extends AbstractSetting
 	private List<String> options;
 	Consumer<String> onChange;
 	
-	public ChoiceSetting(String id, List<String> options, boolean setDefault)
+	public ChoiceSetting(String id, List<String> options, String category, boolean setDefault)
 	{
-		super(id, setDefault);
+		super(id, category, setDefault);
 		this.options = options;
 		if(setDefault)
 			setDefault();
 	}
 	
-	public ChoiceSetting(String id, List<String> options, String name, boolean setDefault)
+	public ChoiceSetting(String id, List<String> options, String category, String name, boolean setDefault)
 	{
-		super(id, name, setDefault);
+		super(id, name, category, setDefault);
 		this.options = options;
 		if(setDefault)
 			setDefault();

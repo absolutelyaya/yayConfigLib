@@ -17,7 +17,7 @@ public class PerEntrySetting<E extends Enum<E>> extends AbstractSetting
 	
 	public PerEntrySetting(String id, Class<E> enumClass, List<AbstractSetting> settings, List<E> excludedEntries)
 	{
-		super(id, false);
+		super(id, "", false);
 		this.enumClass = enumClass;
 		this.settings = settings;
 		this.id = id;

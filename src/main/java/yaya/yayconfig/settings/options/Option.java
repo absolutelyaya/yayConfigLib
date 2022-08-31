@@ -29,4 +29,9 @@ public abstract class Option
 	{
 		return setting.id;
 	}
+	
+	public String getSubCategory()
+	{
+		return setting.subCategory;
+	}
 }

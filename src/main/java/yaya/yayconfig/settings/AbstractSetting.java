@@ -12,23 +12,25 @@ import java.util.List;
 @Environment(EnvType.CLIENT)
 public abstract class AbstractSetting implements SettingsOption
 {
-	public String id, translationKey;
+	public String id, translationKey, subCategory;
 	
 	protected final boolean setDefault;
 	protected List<BooleanSetting> requirements = new ArrayList<>();
 	
-	public AbstractSetting(String id, boolean setDefault)
+	public AbstractSetting(String id, String subCategory, boolean setDefault)
 	{
 		this.id = id;
 		this.translationKey = TranslationUtil.getTranslationKey("setting", id);
 		this.setDefault = setDefault;
+		this.subCategory = subCategory;
 	}
 	
-	public AbstractSetting(String id, String name, boolean setDefault)
+	public AbstractSetting(String id, String name, String subCategory, boolean setDefault)
 	{
 		this.id = id;
 		this.translationKey = TranslationUtil.getTranslationKey("setting", name);
 		this.setDefault = setDefault;
+		this.subCategory = subCategory;
 		if(setDefault)
 			setDefault();
 	}
