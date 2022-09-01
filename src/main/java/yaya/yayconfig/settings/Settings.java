@@ -12,6 +12,7 @@ import java.util.List;
 @Environment(EnvType.CLIENT)
 public class Settings
 {
+	protected static boolean usePresets;
 	public static Class<? extends SettingsCategory> category;
 	protected static final HashMap<SettingsCategory, List<AbstractSetting>> SETTINGS = new HashMap<>();
 	
@@ -19,9 +20,10 @@ public class Settings
 	public static final ChoiceSetting PRESET = new ChoiceSetting("general.preset", List.of("a", "b", "c", "d"), "", true)
 			.setChangeConsumer(Settings::applyPreset);
 	
-	public Settings(Class<? extends SettingsCategory> category)
+	public Settings(Class<? extends SettingsCategory> category, boolean usePresets)
 	{
 		Settings.category = category;
+		Settings.usePresets = usePresets;
 	}
 	
 	public static void applyPreset(String name)

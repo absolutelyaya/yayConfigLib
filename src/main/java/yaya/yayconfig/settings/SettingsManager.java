@@ -29,6 +29,8 @@ public class SettingsManager
 			return;
 		file = new File(FabricLoader.getInstance().getConfigDir().toFile(), modid + "/settings.txt");
 		
+		if(!Settings.usePresets)
+			return;
 		try
 		{
 			ClassLoader cl = SettingsManager.class.getClassLoader();
