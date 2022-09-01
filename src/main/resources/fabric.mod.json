@@ -7,7 +7,10 @@
   "authors": [
     "Absolutelyaya"
   ],
-  "contact": {},
+  "contact": {
+    "issues": "https://github.com/yaya-nyan/yayConfigLib/issues",
+    "sources": "https://github.com/yaya-nyan/yayConfigLib"
+  },
   "license": "MIT",
   "icon": "assets/yayconfig/icon.png",
   "environment": "client",
@@ -20,7 +23,14 @@
   },
   "custom": {
     "modmenu": {
-      "badges": [ "library" ]
+      "badges": [ "library" ],
+      "parent": {
+        "id": "yaylib",
+        "name": "YayLibrary",
+        "description": "A collection of yayas Libraries.",
+        "icon": "assets/yayconfig/yaylib-icon.png",
+        "badges": [ "library" ]
+      }
     }
   }
 }
