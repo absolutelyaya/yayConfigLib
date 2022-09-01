@@ -26,14 +26,6 @@ public class ChoiceSetting extends AbstractSetting
 			setDefault();
 	}
 	
-	public ChoiceSetting(String id, List<String> options, String category, String name, boolean setDefault)
-	{
-		super(id, name, category, setDefault);
-		this.options = options;
-		if(setDefault)
-			setDefault();
-	}
-	
 	public ChoiceSetting setChangeConsumer(Consumer<String> consume)
 	{
 		onChange = consume;

@@ -21,46 +21,12 @@ public class SliderSetting extends AbstractSetting
 	
 	public SliderSetting(String id, double defaultValue, double min, double max, float step, String category, boolean setDefault)
 	{
-		super(id, category, setDefault);
-		this.defaultValue = defaultValue;
-		this.min = min;
-		this.max = max;
-		this.step = step;
-		this.displayPercent = true;
-		this.decimals = 0;
-		if(setDefault)
-			setDefault();
-	}
-	
-	public SliderSetting(String id, double defaultValue, double min, double max, float step, String name, String category, boolean setDefault)
-	{
-		super(id, name, category, setDefault);
-		this.defaultValue = defaultValue;
-		this.min = min;
-		this.max = max;
-		this.step = step;
-		this.displayPercent = true;
-		this.decimals = 0;
-		if(setDefault)
-			setDefault();
+		this(id, defaultValue, min, max, step, 0, category, setDefault);
 	}
 	
 	public SliderSetting(String id, double defaultValue, double min, double max, float step, int decimals, String category, boolean setDefault)
 	{
 		super(id, category, setDefault);
-		this.defaultValue = defaultValue;
-		this.min = min;
-		this.max = max;
-		this.step = step;
-		this.displayPercent = decimals == 0;
-		this.decimals = decimals;
-		if(setDefault)
-			setDefault();
-	}
-	
-	public SliderSetting(String id, double defaultValue, double min, double max, float step, int decimals, String name, String category, boolean setDefault)
-	{
-		super(id, name, category, setDefault);
 		this.defaultValue = defaultValue;
 		this.min = min;
 		this.max = max;

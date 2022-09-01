@@ -124,6 +124,10 @@ public class CyclingButtonWidget<T> extends PressableWidget implements Orderable
 		return (new Builder<Boolean>((value) -> value ? ScreenTexts.ON : ScreenTexts.OFF)).values(BOOLEAN_VALUES);
 	}
 	
+	public static Builder<Boolean> onOffBuilder(Text on, Text off) {
+		return (new Builder<Boolean>((value) -> value ? on : off)).values(BOOLEAN_VALUES);
+	}
+	
 	static
 	{
 		BOOLEAN_VALUES = ImmutableList.of(Boolean.TRUE, Boolean.FALSE);

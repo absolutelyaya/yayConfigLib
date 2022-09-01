@@ -25,16 +25,6 @@ public abstract class AbstractSetting implements SettingsOption
 		this.subCategory = subCategory;
 	}
 	
-	public AbstractSetting(String id, String name, String subCategory, boolean setDefault)
-	{
-		this.id = id;
-		this.translationKey = TranslationUtil.getTranslationKey("setting", name);
-		this.setDefault = setDefault;
-		this.subCategory = subCategory;
-		if(setDefault)
-			setDefault();
-	}
-	
 	public abstract Text getButtonText();
 	
 	public abstract String serialize();

@@ -11,6 +11,7 @@ import yaya.yayconfig.settings.options.SettingsOption;
 public class BooleanSetting extends AbstractSetting
 {
 	public boolean defaultValue;
+	private Text onText, offText;
 	
 	public BooleanSetting(String id, boolean defaultValue, String category, boolean setDefault)
 	{
@@ -20,12 +21,11 @@ public class BooleanSetting extends AbstractSetting
 			setDefault();
 	}
 	
-	public BooleanSetting(String id, boolean defaultValue, String name, String category, boolean setDefault)
+	public BooleanSetting(String id, boolean defaultValue, String category, String on, String off, boolean setDefault)
 	{
-		super(id, name, category, setDefault);
-		this.defaultValue = defaultValue;
-		if(setDefault)
-			setDefault();
+		this(id, defaultValue, category, setDefault);
+		onText = Text.translatable(on);
+		offText = Text.translatable(off);
 	}
 	
 	public String getOption()
@@ -65,9 +65,14 @@ public class BooleanSetting extends AbstractSetting
 	@Override
 	public Option asOption()
 	{
-		return new YayCycler<>(translationKey, this,
-				() -> SettingsStorage.getBoolean(id), (ignored, value) -> SettingsStorage.setBoolean(id, value),
-				CyclingButtonWidget::onOffBuilder, requirements);
+		if(onText != null && offText != null)
+			return new YayCycler<>(translationKey, this,
+					() -> SettingsStorage.getBoolean(id), (ignored, value) -> SettingsStorage.setBoolean(id, value),
+					() -> CyclingButtonWidget.onOffBuilder(onText, offText), requirements);
+		else
+			return new YayCycler<>(translationKey, this,
+					() -> SettingsStorage.getBoolean(id), (ignored, value) -> SettingsStorage.setBoolean(id, value),
+					CyclingButtonWidget::onOffBuilder, requirements);
 	}
 	
 	@Override
